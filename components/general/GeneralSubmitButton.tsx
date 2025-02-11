@@ -1,12 +1,13 @@
 'use client'
 
+import { ReactNode } from 'react'
 import { useFormStatus } from 'react-dom'
 import { Button } from '../ui/button'
 import { Loader2 } from 'lucide-react'
 
 type GeneralSubmitButtonProps = {
   text: string
-  icon?: React.ReactNode
+  icon?: ReactNode
   variant?:
     | 'default'
     | 'destructive'
@@ -23,12 +24,12 @@ export function GeneralSubmitButton({
   text,
   icon,
   variant,
-  width = 'w-full',
+  width,
 }: GeneralSubmitButtonProps) {
   const { pending } = useFormStatus()
 
   return (
-    <Button variant={variant} className={width}>
+    <Button variant={variant} className={width} disabled={pending}>
       {pending ? (
         <>
           <Loader2 className='size-4 animate-spin' />
@@ -36,7 +37,7 @@ export function GeneralSubmitButton({
         </>
       ) : (
         <>
-          {icon}
+          {icon && <div className=''>{icon}</div>}
           <span>{text}</span>
         </>
       )}

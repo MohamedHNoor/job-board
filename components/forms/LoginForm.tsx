@@ -1,4 +1,3 @@
-import { Button } from '../ui/button'
 import {
   Card,
   CardContent,
@@ -9,10 +8,15 @@ import {
 } from '../ui/card'
 import Github from '../icons/Github'
 import Google from '../icons/Google'
-import { signIn } from '@/utils/auth'
+import { auth, signIn } from '@/utils/auth'
 import { GeneralSubmitButton } from '../general/GeneralSubmitButton'
+import { redirect } from 'next/navigation'
 
-export function LoginForm() {
+export async function LoginForm() {
+  const session = await auth()
+  if (session?.user) {
+    return redirect('/')
+  }
   return (
     <div className='flex flex-col gap-6'>
       <Card>
@@ -23,10 +27,12 @@ export function LoginForm() {
         <CardContent>
           <div className='flex flex-col gap-4'>
             <form>
-              <Button className='w-full' variant={'outline'}>
-                <Google className='size-4' />
-                Login with Google
-              </Button>
+              <GeneralSubmitButton
+                text='Login with Google'
+                variant='outline'
+                width='w-full'
+                icon={<Google className='size-4' />}
+              />
             </form>
             <form
               action={async () => {
@@ -36,13 +42,10 @@ export function LoginForm() {
                 })
               }}
             >
-              {/* <Button className='w-full' variant={'outline'}>
-                <Github className='size-4' />
-                Login with Github
-              </Button> */}
               <GeneralSubmitButton
                 text='Login with Github'
                 variant='outline'
+                width='w-full'
                 icon={<Github className='size-4' />}
               />
             </form>
