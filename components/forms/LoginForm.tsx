@@ -26,7 +26,14 @@ export async function LoginForm() {
         </CardHeader>
         <CardContent>
           <div className='flex flex-col gap-4'>
-            <form>
+            <form
+              action={async () => {
+                'use server'
+                await signIn('google', {
+                  redirectTo: '/',
+                })
+              }}
+            >
               <GeneralSubmitButton
                 text='Login with Google'
                 variant='outline'
