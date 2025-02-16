@@ -2,15 +2,14 @@ import Link from 'next/link'
 import { Button, buttonVariants } from '../ui/button'
 import { ThemeToggle } from './ThemeToggle'
 import { auth, signOut } from '@/utils/auth'
+import { Logo } from './Logo'
 
 export async function Navbar() {
   const session = await auth()
   return (
     <nav className='flex items-center justify-between py-5'>
       <Link href='/'>
-        <h1 className='text-2xl font-bold cursor-pointer'>
-          Job <span className='text-primary'>Board</span>
-        </h1>
+        <Logo className='text-2xl gap-2' size={40} />
       </Link>
       <div className='flex items-center space-x-4'>
         <ThemeToggle />
