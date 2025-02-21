@@ -3,6 +3,7 @@ import { Button, buttonVariants } from '../ui/button'
 import { ThemeToggle } from './ThemeToggle'
 import { auth, signOut } from '@/utils/auth'
 import { Logo } from './Logo'
+import { UserDropdown } from './UserDropdown'
 
 export async function Navbar() {
   const session = await auth()
@@ -11,17 +12,19 @@ export async function Navbar() {
       <Link href='/'>
         <Logo className='text-2xl gap-2' size={40} />
       </Link>
-      <div className='flex items-center space-x-4'>
+      {/* desktop navigation */}
+
+      <div className='hidden md:flex items-center gap-5'>
         <ThemeToggle />
+        <Link href='/post-job' className={buttonVariants({ size: 'lg' })}>
+          Post Job
+        </Link>
         {session?.user ? (
-          <form
-            action={async () => {
-              'use server'
-              await signOut({ redirectTo: '/' })
-            }}
-          >
-            <Button>Logout</Button>
-          </form>
+          <UserDropdown
+            email={session.user.email as string}
+            name={session.user.name as string}
+            image={session.user.image as string}
+          />
         ) : (
           <Link
             href='/login'
