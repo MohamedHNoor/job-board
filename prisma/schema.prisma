@@ -41,6 +41,8 @@ model Company {
   website String
   xAccount String?
 
+  JobPost JobPost[]
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 
@@ -99,5 +101,31 @@ model VerificationToken {
   expires    DateTime
  
   @@id([identifier, token])
+}
+
+model JobPost {
+  id String @id @default(cuid())
+
+  jobTitle String
+  employmentType String
+  location String
+  slaryFrom Int
+  salaryTo Int
+  jobDescription String
+  listingDuration Int
+  benefits String[]
+  status JobPostStatus @default(DRAFT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  company Company @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  companyId String
+}
+
+enum JobPostStatus {
+  DRAFT
+  ACTIVE
+  EXPIRED
 }
  
