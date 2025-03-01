@@ -21,7 +21,7 @@ export const JobSchema = z.object({
   jobTitle: z.string().min(2, 'Job title must be at least 2 characters long'),
   employmentType: z.string().min(1, 'Please select an employment type'),
   location: z.string().min(1, 'Please select a location'),
-  slaryFrom: z.number().min(1, 'Salary from is required'),
+  salaryFrom: z.number().min(1, 'Salary from is required'),
   salaryTo: z.number().min(1, 'Salary to is required'),
   jobDescription: z.string().min(1, 'Job description is required'),
   listingDuration: z.number().min(1, 'Listing duration is required'),
@@ -32,4 +32,5 @@ export const JobSchema = z.object({
   companyWebsite: z.string().min(1, 'Company website is required'),
   companyXAccount: z.string().optional(),
   companyDescription: z.string().min(1, 'Company description is required'),
+  companyAbout: z.string().min(1, 'Company about is required'),
 })
