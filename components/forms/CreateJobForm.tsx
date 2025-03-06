@@ -23,6 +23,7 @@ import {
 } from '../ui/select'
 import { SelectLabel } from '@radix-ui/react-select'
 import { countryList } from '@/utils/countriesList'
+import { SalaryRangeSelector } from '../general/SalaryRangeSalector'
 
 export function CreateJobForm() {
   const form = useForm<z.infer<typeof JobSchema>>({
@@ -142,7 +143,15 @@ export function CreateJobForm() {
               {/* salary */}
               <FormItem>
                 <FormLabel>Salary Range</FormLabel>
-                <FormControl></FormControl>
+                <FormControl>
+                  <SalaryRangeSelector
+                    control={form.control}
+                    maxSalary={1000000}
+                    minSalary={10000}
+                    step={2000}
+                    currency='NZD'
+                  />
+                </FormControl>
               </FormItem>
             </div>
           </CardContent>
