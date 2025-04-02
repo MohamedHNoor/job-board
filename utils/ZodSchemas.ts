@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+// company schema
 export const CompanySchema = z.object({
   name: z.string().min(2, 'Company name must be at least 2 characters long'),
   location: z.string().min(1, 'Location must be defined'),
@@ -17,6 +18,7 @@ export const JobSeekerSchema = z.object({
   resume: z.string().min(1, 'Please upload your resume'),
 })
 
+// job schema
 export const JobSchema = z.object({
   jobTitle: z.string().min(2, 'Job title must be at least 2 characters long'),
   employmentType: z.string().min(1, 'Please select an employment type'),
